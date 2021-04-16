@@ -1,0 +1,23 @@
+@model  dhamo.aleksander._5H.SecondaWeb.Models.Prenotazione
+@{
+    ViewData["Title"] = "Prenota";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Prenota</h1>
+    <form class="m-2" method="POST" asp-action="Prenota" asp-controller="Home">
+        <div class="form-group">
+            <label asp-for="Nome">Il tuo nome</label>
+            <input asp-for="Nome" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">La tua Email</label>
+            <input asp-for="Email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="Telefono">Il tuo numero di telefono</label>
+            <input asp-for="Telefono" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Prenota</button>
+    </form>
+</div>

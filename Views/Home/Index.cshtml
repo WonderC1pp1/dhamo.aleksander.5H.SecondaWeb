@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+	var imagePath1=@"/SitoTema/images/thumbs/";
+	var imagePath2=@"/SitoTema/images/fulls/";
+	var imageFulls="";
+	var imageThumbs="";
+	string[] Titoli={"","MotoGp", "F1", "Tennis", "Calcio", "Ciclismo"};
+	string[] Descrizione={"",
+	"La MotoGP è la massima categoria (in termini prestazionali) di moto da corsa su circuito definita dalla Federazione Internazionale di Motociclismo.",
+	"La Formula 1, in sigla F1, in inglese FIA Formula One World Championship e indicata in italiano come Formula Uno, è la massima categoria (in termini prestazionali) di vetture monoposto a ruote scoperte da corsa su circuito definita dalla Federazione Internazionale dell'Automobile (FIA).",
+	"Il tennis è uno sport della racchetta che vede opposti due giocatori o quattro in un campo da gioco diviso in due metà da una rete alta 0,914 m al centro e 1,07 m ai lati: è considerato uno sport completo e armonico in quanto sono richieste al contempo ottime capacità fisiche e mentali.",
+	"Il calcio è uno sport di squadra giocato con un pallone sferico su un campo di gioco rettangolare, con due porte",
+	"La pratica dello sport della bicicletta a livello agonistico; è specialità olimpica comprendente anche la mountain bike e il BMX"};
+}
+
+@for(int i=1;i<6;i++)
+{
+	imageThumbs= imagePath1 + i + ".jpg";
+	imageFulls= imagePath2 + i + ".jpg";
+
+    <article class="thumb">
+		<a href="@imageFulls" class="image"><img src="@imageThumbs"/></a>
+		<h2>@Titoli[i]</h2>
+		<p>@Descrizione[i]</p>
+	</article>
+
+	imageThumbs="";
+	imageFulls="";
+}
