@@ -9,7 +9,7 @@ using dhamo.aleksander._5H.SecondaWeb.Models;
 namespace dhamo.aleksander._5H.SecondaWeb.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20210305093543_Prima versione del db")]
+    [Migration("20210514095442_Prima versione del db")]
     partial class Primaversionedeldb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

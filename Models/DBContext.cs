@@ -12,6 +12,10 @@ namespace dhamo.aleksander._5H.SecondaWeb.Models
             _options = options; 
         }
 
+        public DBContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -39,7 +39,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         public IActionResult Prenota(Prenotazione p)
         {
             //tipo - etichetta - operatore - valore - terminatore di istruzione
-            var db=new PrenotazioneContext(); //oppure PrenotazioneContext db=new PrenotazioneContext(); 
+            var db=new DBContext(); //oppure PrenotazioneContext db=new PrenotazioneContext(); 
             db.Prenotazioni.Add(p);
             db.SaveChanges();
             return View("Elenco", db);
@@ -49,7 +49,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         //cancella prenotazione
         public IActionResult Cancella(int id)
         {
-            var db=new PrenotazioneContext();
+            var db=new DBContext();
             Prenotazione prenotazione = db.Prenotazioni.Find(id);
             if(prenotazione!=null)
             {
@@ -65,8 +65,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         [HttpGet]
         public IActionResult Modifica(int id)
         {
-            var dbds=new DBContext();
-            var db=new PrenotazioneContext();
+            var db=new DBContext();
             Prenotazione prenotazione = db.Prenotazioni.Find(id);
             if(prenotazione!=null)
             {
@@ -81,7 +80,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         [HttpPost]
         public IActionResult Modifica(int id, Prenotazione newPrenotazione)
         {
-            var db=new PrenotazioneContext();
+            var db=new DBContext();
             Prenotazione prenotazione = db.Prenotazioni.Find(id);
             if(prenotazione!=null)
             {
@@ -96,7 +95,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
 
         public IActionResult CancellaTutto()
         {   
-            var db=new PrenotazioneContext();
+            var db=new DBContext();
             db.RemoveRange(db.Prenotazioni);
             
             //Prenotazione prenotazione = db.Prenotazioni.Find(id);
@@ -118,7 +117,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
             if(!fim.EndOfStream)
             {
                 //accedi al database
-                var db=new PrenotazioneContext(); //oppure PrenotazioneContext db=new PrenotazioneContext(); 
+                var db=new DBContext(); //oppure PrenotazioneContext db=new PrenotazioneContext(); 
                 string riga = fim.ReadLine();
                 while(!fim.EndOfStream)
                 {

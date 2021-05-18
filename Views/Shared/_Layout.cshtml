@@ -5,51 +5,64 @@
 		<title>Multiverse by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/SitoTema/assets/css/main.css" />
+		<link rel="stylesheet" href="/SitoTema/assets/css/main.css"/>
 		<noscript><link rel="stylesheet" href="SitoTema/assets/css/noscript.css" /></noscript>
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<!--NavBar bootstrap link:  https://getbootstrap.com/docs/4.5/components/navbar/  -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
-
+		<!--istruzione per usare le iconcine nella navbar, sito: https://materializecss.com/icons.html-->
+		<script src="https://use.fontawesome.com/b9d8a442fc.js"></script>
 
 	</head>
 	
 	<body class="is-preload">
 
-		<!--NavBar-->
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DhamoImages</a>
-				</div>
-				<ul class="nav navbar-nav">
+
+		 <!--NavBar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">DhamoImages</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    @if (User.Identity.IsAuthenticated)
+					{
+						<li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Privacy">Privacy</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Account" asp-action="Prenota">Prenota</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Account" asp-action="Elenco">Elenco</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Account" asp-action="Upload">Upload</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Account" asp-action="LogOut">Logout</a>
+						</li>
+					}
+					
 					<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Prenota">Prenota</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Elenco">Elenco</a>
-                        </li>
-						<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Upload">Upload</a>
-                        </li>
-						<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Logout</a>
-                        </li>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a class="nav-link text-dark active" asp-area="" asp-controller="Account" asp-action="Accedi"><span class="glyphicon glyphicon-user"></span> Accedi</a></li>
-					<li><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Registra"><span class="glyphicon glyphicon-log-in"></span> Registrati</a></li>
-				</ul>
-			</div>
-		</nav>
+				@if (!User.Identity.IsAuthenticated)
+				{
+					<ul class="nav navbar-nav navbar-right">
+						<li><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Accedi"><i class="fa fa-sign-in" aria-hidden="true"></i> Accedi</a></li>
+						<li><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Registra"><i class="fa fa-address-book-o" aria-hidden="true"></i> Registrati</a></li>
+					</ul>
+				}
+            </div>
+        </nav>
 
 
 
@@ -68,17 +81,17 @@
 
 				<!-- Main -->
 				
-						<div id="main">
+						
 							@RenderBody()
-						</div>
+						
 
 				<!-- Footer -->
 					<footer id="footer" class="panel">
 						<div class="inner split">
 							<div>
 								<section>
-									<h2>Magna feugiat sed adipiscing</h2>
-									<p>Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum eget quis orci mattis aliquet. Maecenas fringilla et ante at lorem et ipsum. Dolor nulla eu bibendum sapien. Donec non pharetra dui. Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum.</p>
+									<h2>DhamoImages</h2>
+									<p style="color:#a0a0a1">Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum eget quis orci mattis aliquet. Maecenas fringilla et ante at lorem et ipsum. Dolor nulla eu bibendum sapien. Donec non pharetra dui. Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum.</p>
 								</section>
 								<section>
 									<h2>Follow me on ...</h2>
@@ -124,12 +137,12 @@
 
 
 		<!-- Scripts -->
-			<script src="/SitoTema/assets/js/jquery.min.js"></script>
-			<script src="/SitoTema/assets/js/jquery.poptrox.min.js"></script>
-			<script src="/SitoTema/assets/js/browser.min.js"></script>
-			<script src="/SitoTema/assets/js/breakpoints.min.js"></script>
-			<script src="/SitoTema/assets/js/util.js"></script>
-			<script src="/SitoTema/assets/js/main.js"></script>
+		<script src="/SitoTema/assets/js/jquery.min.js"></script>
+		<script src="/SitoTema/assets/js/jquery.poptrox.min.js"></script>
+		<script src="/SitoTema/assets/js/browser.min.js"></script>
+		<script src="/SitoTema/assets/js/breakpoints.min.js"></script>
+		<script src="/SitoTema/assets/js/util.js"></script>
+		<script src="/SitoTema/assets/js/main.js"></script>
 
 
 	</body>

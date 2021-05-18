@@ -586,10 +586,9 @@ input, select, textarea {
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		background: #34363b;
-		border: 0;
+		border: 8;
 		border-radius: 0;
-		color: #a0a0a1;
+		color: #000000;
 		display: block;
 		outline: 0;
 		padding: 0 1em;
@@ -699,7 +698,6 @@ input, select, textarea {
 
 			input[type="checkbox"] + label:before,
 			input[type="radio"] + label:before {
-				background: #34363b;
 				content: '';
 				display: inline-block;
 				font-size: 0.8em;

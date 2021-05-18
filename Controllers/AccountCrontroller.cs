@@ -121,7 +121,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
             {
                 
 
-                var db=new PrenotazioneContext();
+                var db=new DBContext();
                 return View("~/Views/Home/Elenco.cshtml",db);
             }
             return RedirectToAction("Accedi", "Account");        

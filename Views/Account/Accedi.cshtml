@@ -4,7 +4,36 @@
     ViewData["Title"] = "Accedi";
 }
 
-<div class="row">
+<link rel="stylesheet" href="/css/accediStyle.css" />
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="/SitoTema/images/imgUtente.png" width="45%" id="icon" alt="User Icon" />
+    </div>
+
+    <br>
+    <br> 
+
+    <!-- Login Form -->
+    <form>
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a asp-area="" asp-controller="Account" asp-action="Registra" class="underlineHover">Crea account</a>
+    </div>
+
+  </div>
+</div>
+
+@* <div class="row">
     <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
@@ -36,4 +65,4 @@
         </form>
 
     </div>
-</div>-->
+</div> *@
