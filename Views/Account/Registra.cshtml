@@ -1,9 +1,8 @@
 @model dhamo.aleksander._5H.SecondaWeb.dto.RegistraDto
 
 @{
-    ViewData["Title"] = "Registrazione di un nuovo utente";
-}
-
+    ViewData["Title"] = "Accedi";
+ }
 
 <link rel="stylesheet" href="/css/accediStyle.css" />
 
@@ -13,22 +12,27 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="/SitoTema/images/imgUtente.png" width="45%" id="icon" alt="User Icon" />
+      <img src="/SitoTema/images/imgUtente.png" id="icon" alt="User Icon" />
     </div>
 
-    <br>
-    <br> 
-
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+    <form method="post" asp-controller="Account" asp-action="Registra">
+
+      <div asp-validation-summary="All" class="text-danger"></div>
+      
+      <input asp-for="Email" type="text" class="form-control" placeholder="email">
+
+      <input asp-for="Password" type="password" class="form-control" placeholder="password">
+
+      <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="confirm password">
+
+      <input type="submit" class="fadeIn fourth" value="Registrati">
+
     </form>
 
-    <!-- Remind Passowrd -->
+    <!-- Crea account -->
     <div id="formFooter">
-      <a asp-area="" asp-controller="Account" asp-action="Registra" class="underlineHover">Crea account</a>
+      <a asp-area="" asp-controller="Account" asp-action="Accedi" class="underlineHover">Se hai già un account clicca qui</a>
     </div>
 
   </div>

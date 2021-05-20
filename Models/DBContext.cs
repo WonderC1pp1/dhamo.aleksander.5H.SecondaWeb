@@ -25,5 +25,6 @@ namespace dhamo.aleksander._5H.SecondaWeb.Models
             => options.UseSqlite("Data Source=database.db");
 
         public DbSet<Prenotazione> Prenotazioni { get ; set; }
+        public DbSet<Image> Immagini { get ; set; }
     }
 }

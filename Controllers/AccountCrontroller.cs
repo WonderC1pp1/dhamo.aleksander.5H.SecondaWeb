@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using dhamo.aleksander._5H.SecondaWeb.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace dhamo.aleksander._5H.SecondaWeb.Controllers
 {
@@ -52,6 +53,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
                      //await _signInManager.SignInAsync(user, isPersistent: false);
                      return RedirectToAction("Index", "Home");
                 }
@@ -71,7 +73,6 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
             if (ModelState.IsValid)
             {
                var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
-
                if (result.Succeeded) {
                    // Se l'utente fa login correttamente, entra.
                    return RedirectToAction("Index", "Home");
@@ -83,7 +84,10 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
                    ModelState.AddModelError(string.Empty, "Login error");
                }
             }
+
             return View(user); 
+
+            
         }
 
         public async Task<IActionResult> LogOut()
@@ -115,27 +119,57 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Elenco()
+        public async Task<IActionResult> Elenco()
         {
             if( User.Identity.IsAuthenticated )
-            {
+            {            
                 
+                IdentityUser user = await _userManager.FindByEmailAsync(User.Identity.Name);
 
                 var db=new DBContext();
+
+                HttpContext.Session.SetString("idUser", user.Id);
+
+                //var immagini= (from s in db.Immagini where s.idUtente == $"{user.Id}" select s).ToArray();
+
                 return View("~/Views/Home/Elenco.cshtml",db);
             }
             return RedirectToAction("Accedi", "Account");        
         }
 
+        
         [HttpGet]
-        public IActionResult Prenota()
+        public IActionResult Pubblica()
         {
             if( User.Identity.IsAuthenticated )
             {
-                return View("~/Views/Home/Prenota.cshtml");
+                return View("~/Views/Home/Pubblica.cshtml");
             }
             return RedirectToAction("Accedi", "Account");
             
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Pubblica(Image file)
+        {
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            file.idUtente = user.Id;
+            var db = new DBContext();
+            db.Immagini.Add(file);
+            db.SaveChanges();
+            // file.idUtente= user
+            return RedirectToAction("Elenco", "Account");
+        }
+
+        [HttpPost]
+        public IActionResult Upload(Image file)
+        {
+            // var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            // file.idUtente = user.Id;
+            // var db = new DBContext();
+            // db.Immagini.Add(file);
+            // // file.idUtente= user
+            return View("Index");
         }
 
     }

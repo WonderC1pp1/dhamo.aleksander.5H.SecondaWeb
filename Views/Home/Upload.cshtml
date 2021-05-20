@@ -1,8 +1,10 @@
 @model CreatePost
-<form asp-action="Upload" asp-controller="Home" enctype="multipart/form-data">   
+<form method="POST" asp-action="Upload" asp-controller="Home" enctype="multipart/form-data">   
 
-    <input asp-for="Descrizione"/>
+    <br>
+    <p>Scegli un file csv da inviare contenente le informazioni della foto (formato: titolo;descrizione;link)</p>
     <input asp-for="MyCSV"/>
-
+    <br>
+    <br>
     <input type="submit"/>
 </form>

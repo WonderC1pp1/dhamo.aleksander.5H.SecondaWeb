@@ -12,20 +12,25 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="/SitoTema/images/imgUtente.png" width="45%" id="icon" alt="User Icon" />
+      <img src="/SitoTema/images/imgUtente.png" width="30%" id="icon" alt="User Icon" />
     </div>
 
-    <br>
-    <br> 
-
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+    <form method="post" asp-controller="Account" asp-action="Accedi">
+
+      <div asp-validation-summary="All" class="text-danger"></div>
+      
+      <input asp-for="Email" type="text" class="form-control" placeholder="email">
+
+      <input asp-for="Password" type="password" class="form-control" placeholder="password">
+
+      <br>
+      
+      <input type="submit" class="fadeIn fourth" value="Accedi">
+
     </form>
 
-    <!-- Remind Passowrd -->
+    <!-- Crea account -->
     <div id="formFooter">
       <a asp-area="" asp-controller="Account" asp-action="Registra" class="underlineHover">Crea account</a>
     </div>
@@ -65,4 +70,4 @@
         </form>
 
     </div>
-</div> *@
+</div>*@

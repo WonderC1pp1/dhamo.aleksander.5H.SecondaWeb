@@ -1,20 +1,32 @@
-﻿<div id="main">
+﻿<link rel="stylesheet" href="/SitoTema/assets/css/main.css"/>
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<h1><strong>Multiverse</strong> by HTML5 UP</h1>
+	<nav>
+		<ul>
+			<li><a href="#footer" class="icon solid fa-info-circle">About</a></li>
+		</ul>
+	</nav>
+</header>	
+
+<div id="main">
 	@{
+		var db=new DBContext();
 		ViewData["Title"] = "Home Page";
-		var imagePath1=@"/SitoTema/images/thumbs/";
-		var imagePath2=@"/SitoTema/images/fulls/";
-		var imageFulls="";
-		var imageThumbs="";
-		string[] Titoli={"","MotoGp", "F1", "Tennis", "Calcio", "Ciclismo"};
-		string[] Descrizione={"",
-		"La MotoGP è la massima categoria (in termini prestazionali) di moto da corsa su circuito definita dalla Federazione Internazionale di Motociclismo.",
-		"La Formula 1, in sigla F1, in inglese FIA Formula One World Championship e indicata in italiano come Formula Uno, è la massima categoria (in termini prestazionali) di vetture monoposto a ruote scoperte da corsa su circuito definita dalla Federazione Internazionale dell'Automobile (FIA).",
-		"Il tennis è uno sport della racchetta che vede opposti due giocatori o quattro in un campo da gioco diviso in due metà da una rete alta 0,914 m al centro e 1,07 m ai lati: è considerato uno sport completo e armonico in quanto sono richieste al contempo ottime capacità fisiche e mentali.",
-		"Il calcio è uno sport di squadra giocato con un pallone sferico su un campo di gioco rettangolare, con due porte",
-		"La pratica dello sport della bicicletta a livello agonistico; è specialità olimpica comprendente anche la mountain bike e il BMX"};
 	}
 
-	@for(int i=1;i<6;i++)
+	@foreach (var immagine in db.Immagini)
+	{
+		<article class="thumb">
+			<a href="@immagine.linkImmagine" class="image"><img src="@immagine.linkImmagine"/></a>
+			<h2>@immagine.Titolo</h2>
+			<p>@immagine.Descrizione</p>
+		</article>
+	}
+
+	@* @for(int i=1;i<6;i++)
 	{
 		imageThumbs= imagePath1 + i + ".jpg";
 		imageFulls= imagePath2 + i + ".jpg";
@@ -26,6 +38,20 @@
 		</article>
 
 		imageThumbs="";
-		imageFulls="";
-	}
+		imageFulls=""; 
+	} *@
+
 </div>
+<footer id="footer" class="panel">
+	<div class="inner split">
+		<div>
+			<section>
+				<h2>DhamoImages</h2>
+				<p style="color:#a0a0a1">DhamoImages è un sito che permette a fotografi di ogni rango di poter pubblicare in maniera completamente gratuita i loro scatti migliori. Ad ogni foto verrà associata ad un titolo e una breve descrizione scritta dal fotografo. Il sito è ancora in sviluppo...</p>
+			</section>
+			<p class="copyright">
+			&copy; Unttled. Design: <a href="http://html5up.net">HTML5 UP</a>.
+			</p>
+		</div>
+	</div>
+</footer>

@@ -10,6 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace dhamo.aleksander._5H.SecondaWeb.Controllers
 {
@@ -35,27 +39,19 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         }
 
         
-        [HttpPost]
-        public IActionResult Prenota(Prenotazione p)
-        {
-            //tipo - etichetta - operatore - valore - terminatore di istruzione
-            var db=new DBContext(); //oppure PrenotazioneContext db=new PrenotazioneContext(); 
-            db.Prenotazioni.Add(p);
-            db.SaveChanges();
-            return View("Elenco", db);
-        }
+        
 
 
         //cancella prenotazione
         public IActionResult Cancella(int id)
         {
             var db=new DBContext();
-            Prenotazione prenotazione = db.Prenotazioni.Find(id);
-            if(prenotazione!=null)
+            Image immagine = db.Immagini.Find(id);
+            if(immagine!=null)
             {
-                db.Remove(prenotazione);            
+                db.Immagini.Remove(immagine);            
                 db.SaveChanges();
-                return View("Elenco",db);
+                return View("~/Views/Home/Index.cshtml");
             }else{
                 return NotFound();
             }
@@ -66,10 +62,10 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         public IActionResult Modifica(int id)
         {
             var db=new DBContext();
-            Prenotazione prenotazione = db.Prenotazioni.Find(id);
-            if(prenotazione!=null)
+            Image immagine = db.Immagini.Find(id);
+            if(immagine!=null)
             {
-                return View("Modifica",prenotazione);
+                return View("Modifica",immagine);
             }
             else{
                 return NotFound();                
@@ -78,16 +74,17 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Modifica(int id, Prenotazione newPrenotazione)
+        public IActionResult Modifica(Image newImage)
         {
             var db=new DBContext();
-            Prenotazione prenotazione = db.Prenotazioni.Find(id);
-            if(prenotazione!=null)
+            Image oldImage = db.Immagini.Find(newImage.idImage);
+            if(oldImage!=null)
             {
-                prenotazione.Nome=newPrenotazione.Nome;
-                prenotazione.Email=newPrenotazione.Email;
-                prenotazione.Telefono=newPrenotazione.Telefono;
-                db.Prenotazioni.Update(prenotazione);
+                oldImage.Descrizione= newImage.Descrizione;
+                oldImage.linkImmagine= newImage.linkImmagine;
+                oldImage.Titolo= newImage.Titolo;
+
+                db.Immagini.Update(oldImage);
                 db.SaveChanges();
             }
             return View("Elenco",db);
@@ -96,7 +93,7 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
         public IActionResult CancellaTutto()
         {   
             var db=new DBContext();
-            db.RemoveRange(db.Prenotazioni);
+            db.RemoveRange(db.Immagini);
             
             //Prenotazione prenotazione = db.Prenotazioni.Find(id);
             //db.Remove(prenotazione);
@@ -104,7 +101,6 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
             return View("Elenco",db);
         }      
 
-        
         [HttpPost]
         public IActionResult Upload(CreatePost post)
         {
@@ -123,9 +119,9 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
                 {
                     riga = fim.ReadLine();
                     string[] colonne = riga.Split(";");
-                    Prenotazione p= new Prenotazione{Nome=colonne[0], Email=colonne[1], Telefono=colonne[2], Partecipazione=Convert.ToBoolean(colonne[3])};
-                    
-                    db.Prenotazioni.Add(p);
+                    Image image= new Image{idUtente = this.HttpContext.Session.GetString("idUser"), Titolo= colonne[0], Descrizione=colonne[1], linkImmagine=colonne[2] };
+                     
+                    db.Immagini.Add(image);
                 }                
                 db.SaveChanges();
             
@@ -133,6 +129,9 @@ namespace dhamo.aleksander._5H.SecondaWeb.Controllers
             }         
             return View();
         }  
+
         
+        
+
     }
 }

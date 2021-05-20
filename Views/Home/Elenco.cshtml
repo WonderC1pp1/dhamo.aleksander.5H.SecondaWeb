@@ -1,11 +1,46 @@
+@using Microsoft.AspNetCore.Http;
+
 @model DBContext
 @{
     ViewData["Title"] = "Grazie";
-}
+    int i=1;
+    string userId= Context.Session.GetString("idUser");
+
+    //Prende solo le immagini dell'utente
+    var immagini= (from s in Model.Immagini where s.idUtente == userId select s).ToArray();
     
+}
 
+<br>
+<br>
+    
+<table class="table">
+    <thead style="background-color: lightblue;">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titolo</th>
+            <th scope="col">Descrizione</th>
+            <th scope="col">Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var immagine in immagini)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td>@immagine.Titolo</td>
+                <td>@immagine.Descrizione</td>
+                <td>@immagine.linkImmagine</td>
+                <td>@Html.ActionLink("cancella","Cancella","Home",new {id=immagine.idImage},null)</td>
+                <td>@Html.ActionLink("modifica","Modifica","Home",new {id=immagine.idImage},null)</td>
+            </tr>
 
-<div class="text-center">
+            i++;
+        }
+    </tbody>
+</tbody>
+
+@* <div class="text-center">
     <h1 class="display-4">Ciao</h1>
     <h3>Ecco l'elenco delle persone prenotate</h3>
     <h3>Per cancellare tutti i dati @Html.ActionLink("clicca qui","CancellaTutto","Home",null,null)</h3>
@@ -32,4 +67,4 @@
         </table>
     </center>
     
-</div>
+</div> *@

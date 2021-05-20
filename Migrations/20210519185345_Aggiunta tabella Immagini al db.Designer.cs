@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dhamo.aleksander._5H.SecondaWeb.Models;
 
 namespace dhamo.aleksander._5H.SecondaWeb.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210519185345_Aggiunta tabella Immagini al db")]
+    partial class AggiuntatabellaImmaginialdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,16 +216,10 @@ namespace dhamo.aleksander._5H.SecondaWeb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Descrizione")
+                    b.Property<string>("Immagine")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Titolo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("idUtente")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("linkImmagine")
+                    b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
                     b.HasKey("idImage");
